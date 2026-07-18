@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Onty! - dari Ryan</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Pustaka Konfeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -18,6 +20,100 @@
             overflow-x: hidden;
             text-align: center;
         }
+
+        /* --- HALAMAN LOGIN --- */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #fcf8f2 0%, #f5e6d3 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .login-box {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(229, 169, 59, 0.2);
+            border-top: 5px solid #e5a93b;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-box h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #e5a93b;
+            margin-bottom: 10px;
+        }
+        .login-box p {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            color: #4a4a4a;
+        }
+        .input-group input:focus {
+            border-color: #e5a93b;
+            outline: none;
+            box-shadow: 0 0 8px rgba(229, 169, 59, 0.2);
+        }
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: #e5a93b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(229, 169, 59, 0.3);
+        }
+        .btn-login:hover {
+            background-color: #cd932a;
+            transform: translateY(-2px);
+        }
+        .error-message {
+            color: #d9534f;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            display: none;
+            font-weight: 600;
+        }
+
         /* Cover Pembuka (Fullscreen) */
         .cover {
             height: 100vh;
@@ -45,13 +141,12 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        /* Gaya Foto Bundar di Cover Depan */
         .cover-photo {
             width: 180px;
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #e5a93b; /* Bingkai emas */
+            border: 4px solid #e5a93b;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             margin-bottom: 20px;
         }
@@ -72,7 +167,7 @@
         }
         .btn-open {
             padding: 12px 35px;
-            background-color: #e5a93b; /* Warna Gold hangat */
+            background-color: #e5a93b;
             color: #fff;
             border: none;
             border-radius: 25px;
@@ -103,7 +198,7 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 100;
-            display: none; /* Baru muncul setelah pesan dibuka */
+            display: none;
             align-items: center;
             justify-content: center;
             transition: 0.3s;
@@ -113,9 +208,18 @@
             background: #cd932a;
         }
 
-        /* Konten Utama (Disembunyikan sebelum tombol diklik) */
+        /* --- BACKGROUND TEMA ULANG TAHUN UTAMA --- */
         #main-content {
             display: none;
+            /* Latar belakang bertema perayaan soft ceria (Krem Merah Muda dengan aksen pola lingkaran pesta confetti pudar) */
+            background-color: #fff9f3;
+            background-image: 
+                radial-gradient(rgba(229, 169, 59, 0.15) 12%, transparent 12%),
+                radial-gradient(rgba(243, 166, 131, 0.2) 12%, transparent 12%),
+                url('https://www.transparenttextures.com/patterns/pinstripe.png'); /* memberi tekstur kertas halus */
+            background-size: 60px 60px, 80px 80px, auto;
+            background-position: 0 0, 30px 30px, 0 0;
+            min-height: 100vh;
         }
 
         /* Section Global */
@@ -129,17 +233,20 @@
             font-size: 3.5rem;
             color: #c58c2b;
             margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
 
-        /* Ucapan Box */
+        /* Ucapan Box Berlatar Belakang Ulang Tahun */
         .ucapan-box {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.93); /* Sedikit transparan agar menyatu dengan background */
             padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            border-top: 4px solid #e5a93b;
+            box-shadow: 0 10px 25px rgba(229, 169, 59, 0.1);
+            border-top: 5px solid #e5a93b;
+            border-bottom: 5px solid #e5a93b;
             line-height: 1.8;
             font-size: 1rem;
+            position: relative;
         }
         .ucapan-box p {
             margin-bottom: 15px;
@@ -151,7 +258,7 @@
             margin-top: 25px;
         }
 
-        /* Hitung Mundur (Countdown Umur Baru) */
+        /* Hitung Mundur (Countdown) */
         .countdown {
             display: flex;
             justify-content: center;
@@ -163,7 +270,7 @@
             padding: 15px;
             min-width: 75px;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(229, 169, 59, 0.1);
         }
         .time-box span {
             display: block;
@@ -190,11 +297,12 @@
             height: 220px;
             object-fit: cover;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            border: 3px solid #fff;
             transition: 0.3s;
         }
         .gallery-grid img:hover {
-            transform: scale(1.04);
+            transform: scale(1.04) rotate(1deg);
         }
 
         /* Footer */
@@ -208,6 +316,27 @@
     </style>
 </head>
 <body>
+
+    <!-- OVERLAY LOGIN -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <h2>Hanya untuk Onty</h2>
+            <p>Masukkan kunci masuk halaman spesial ini</p>
+            
+            <div class="input-group">
+                <label for="username">Nama Pengguna</label>
+                <input type="text" id="username" placeholder="Masukkan nama..." autocomplete="off">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Kata Sandi</label>
+                <input type="password" id="password" placeholder="Masukkan makanan favorit...">
+            </div>
+            
+            <button class="btn-login" onclick="cekLogin()">Masuk ✨</button>
+            <div class="error-message" id="errorMsg">Maaf, username atau password salah ya Onty! 🥺</div>
+        </div>
+    </div>
 
     <audio id="mySong" loop>
         <source src="Jamrud - Selamat Ulang Tahun.mp3" type="audio/mpeg">
@@ -268,7 +397,7 @@
 
         <section id="memories">
             <h2>Foto Onty</h2>
-            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #777;">Beberapa Foto Onty</p>
+            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #777;">Beberapa Foto Onty (katanya pilih salah satu, aku masukin aja semua)</p>
             <div class="gallery-grid">
                 <img src="ONTY 2.jpeg" alt="Momen 1">
                 <img src="ONTY 3.jpeg" alt="Momen 2">
@@ -277,8 +406,8 @@
         </section>
 
         <footer>
-            <p>Dibuat dengan penuh rasa sayang oleh Ryan</p>
-            <p style="margin-top: 8px; opacity: 0.5;">© 2026 Special Birthday Page.</p>
+            <p>Dibuat oleh Dede Bontot</p>
+            <p style="margin-top: 8px; opacity: 0.5;">30 Oktober 2026 Special Birthday Onty.</p>
         </footer>
 
     </div>
@@ -287,13 +416,67 @@
         const lagu = document.getElementById('mySong');
         const tombolMusik = document.getElementById('musicBtn');
 
-        // 1. Efek Buka Surat & Putar Musik
+        // Fungsi Cek Login
+        function cekLogin() {
+            const userInp = document.getElementById('username').value.trim().toLowerCase();
+            const passInp = document.getElementById('password').value.trim().toLowerCase();
+            const overlay = document.getElementById('loginOverlay');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (userInp === "onty" && passInp === "seblak") {
+                overlay.style.opacity = '0';
+                overlay.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 800);
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('username').style.borderColor = '#d9534f';
+                document.getElementById('password').style.borderColor = '#d9534f';
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                if (document.getElementById('loginOverlay').style.display !== 'none') {
+                    cekLogin();
+                }
+            }
+        });
+
+        // Efek Semburan Konfeti Kiri & Kanan
+        function semburanKonfeti() {
+            var durasi = 3 * 1000;
+            var akhir = Date.now() + durasi;
+
+            (function frame() {
+                // Semburan dari Kiri
+                confetti({
+                    particleCount: 4,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0, y: 0.8 }
+                });
+                // Semburan dari Kanan
+                confetti({
+                    particleCount: 4,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1, y: 0.8 }
+                });
+
+                if (Date.now() < akhir) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Efek Buka Surat, Putar Musik & Tembakkan Konfeti
         function bukaPesan() {
             const cover = document.getElementById('cover');
             
-            // Mencoba memutar lagu saat tombol ditekan
             lagu.play().catch(error => {
-                console.log("Autoplay dicegah oleh browser, musik akan menyala setelah interaksi tambahan.");
+                console.log("Autoplay dicegah browser.");
             });
 
             cover.style.transform = 'translateY(-100vh)';
@@ -302,14 +485,16 @@
                 const mainContent = document.getElementById('main-content');
                 mainContent.style.display = 'block';
                 
-                // Menampilkan tombol kontrol musik di pojok kanan bawah
                 tombolMusik.style.display = 'flex';
+                
+                // Memicu efek ledakan konfeti langsung setelah halaman terbuka
+                semburanKonfeti();
                 
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 800);
         }
 
-        // 2. Fungsi Jeda (Pause) dan Putar (Play) Musik Manual
+        // Fungsi Jeda/Putar Musik
         function toggleMusic() {
             if (lagu.paused) {
                 lagu.play();
@@ -320,7 +505,7 @@
             }
         }
 
-        // 3. Hitung Mundur Menuju Tanggal 30 Oktober 2026 (Pukul 00:00:00)
+        // Hitung Mundur Menuju Tanggal 30 Oktober 2026
         const tanggalAcara = new Date("Oct 30, 2026 00:00:00").getTime();
 
         const timer = setInterval(function() {
