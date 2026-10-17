@@ -1,0 +1,498 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fcf8f2;
+    color: #4a4a4a;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+/* --- HALAMAN LOGIN --- */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #fcf8f2 0%, #f5e6d3 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.login-box {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(229, 169, 59, 0.2);
+    border-top: 5px solid #e5a93b;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-box h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #e5a93b;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    color: #4a4a4a;
+}
+
+.input-group input:focus {
+    border-color: #e5a93b;
+    outline: none;
+    box-shadow: 0 0 8px rgba(229, 169, 59, 0.2);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: #e5a93b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(229, 169, 59, 0.3);
+}
+
+.btn-login:hover {
+    background-color: #cd932a;
+    transform: translateY(-2px);
+}
+
+.error-message {
+    color: #d9534f;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    display: none;
+    font-weight: 600;
+}
+
+/* Cover Pembuka (Fullscreen) */
+.cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=1000') no-repeat center center/cover;
+    color: #ffffff;
+    padding: 20px;
+    transition: transform 1s ease-in-out;
+    position: relative;
+    z-index: 10;
+}
+
+.cover h3 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    color: #f3e5ab;
+}
+
+.cover h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.2rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.cover-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e5a93b;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    margin-bottom: 20px;
+}
+
+.cover p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+.sender-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+    background: rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.btn-open {
+    padding: 12px 35px;
+    background-color: #e5a93b;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.btn-open:hover {
+    background-color: #cd932a;
+    transform: translateY(-2px);
+}
+
+/* Tombol Kontrol Musik Mengambang */
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(229, 169, 59, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+    background: #cd932a;
+}
+
+/* --- BACKGROUND TEMA ULANG TAHUN UTAMA --- */
+#main-content {
+    display: none;
+    background-color: #fff9f3;
+    background-image: 
+        radial-gradient(rgba(229, 169, 59, 0.15) 12%, transparent 12%),
+        radial-gradient(rgba(243, 166, 131, 0.2) 12%, transparent 12%),
+        url('https://www.transparenttextures.com/patterns/pinstripe.png');
+    background-size: 60px 60px, 80px 80px, auto;
+    background-position: 0 0, 30px 30px, 0 0;
+    min-height: 100vh;
+}
+
+/* Section Global */
+section {
+    padding: 70px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: #c58c2b;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+}
+
+/* Garis Pembatas (Divider) */
+.divider {
+    border: 0;
+    border-top: 1px dashed #e5a93b;
+    max-width: 40%;
+    margin: 0 auto;
+}
+
+/* Ucapan Box */
+.ucapan-box {
+    background: rgba(255, 255, 255, 0.93);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(229, 169, 59, 0.1);
+    border-top: 5px solid #e5a93b;
+    border-bottom: 5px solid #e5a93b;
+    line-height: 1.8;
+    font-size: 1rem;
+    position: relative;
+}
+
+.ucapan-box p {
+    margin-bottom: 15px;
+}
+
+.salam-hangat {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: #c58c2b;
+    margin-top: 25px;
+}
+
+/* --- KUE ULANG TAHUN & ANIMASI LILIN --- */
+.cake-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 20px 0;
+}
+
+.cake {
+    position: relative;
+    width: 220px;
+    height: 180px;
+}
+
+.plate {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    height: 15px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+.layer-bottom {
+    bottom: 15px;
+    width: 200px;
+    height: 65px;
+    background-color: #e5a93b;
+}
+
+.layer-top {
+    bottom: 80px;
+    width: 150px;
+    height: 55px;
+    background-color: #f3c66f;
+}
+
+.icing {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.drip {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+}
+
+.drip1 { top: 70px; left: 45px; width: 15px; height: 25px; }
+.drip2 { top: 70px; left: 85px; width: 20px; height: 35px; }
+.drip3 { top: 70px; left: 130px; width: 15px; height: 20px; }
+
+/* Lilin & Nyala Api */
+.candle {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 40px;
+    background: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 10px, #ffffff 10px, #ffffff 20px);
+    border-radius: 4px;
+}
+
+.flame {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 25px;
+    background: radial-gradient(circle, #ffeb3b 0%, #ff9800 60%, #ff5722 100%);
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 15px #ff9800, 0 0 25px #ffeb3b;
+    animation: flicker 0.6s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.9; }
+    100% { transform: translateX(-50%) scale(1.15) rotate(2deg); opacity: 1; }
+}
+
+/* Asap saat lilin padam */
+.smoke {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 25px;
+    background: rgba(180, 180, 180, 0.6);
+    border-radius: 50%;
+    filter: blur(4px);
+    display: none;
+    animation: riseSmoke 1.5s infinite linear;
+}
+
+@keyframes riseSmoke {
+    0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateX(-50%) translateY(-30px) scale(2); opacity: 0; }
+}
+
+.cake-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.btn-action {
+    padding: 10px 20px;
+    background-color: #e5a93b;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.btn-action:hover {
+    background-color: #cd932a;
+    transform: translateY(-2px);
+}
+
+.btn-reset {
+    background-color: #777;
+}
+.btn-reset:hover {
+    background-color: #555;
+}
+
+.wish-text {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #c58c2b;
+    font-size: 1.05rem;
+}
+
+/* Hitung Mundur (Countdown) */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.time-box {
+    background: #fff;
+    padding: 15px;
+    min-width: 75px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(229, 169, 59, 0.1);
+}
+
+.time-box span {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #c58c2b;
+}
+
+.time-box label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+/* Galeri Foto */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    border: 3px solid #fff;
+    transition: 0.3s;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.04) rotate(1deg);
+}
+
+/* Footer */
+footer {
+    padding: 40px 20px;
+    background-color: #2c2c2c;
+    color: #d1d1d1;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
